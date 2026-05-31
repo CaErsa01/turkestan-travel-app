@@ -139,7 +139,7 @@ export function PlaceDetailsDrawer({ place, onClose }: Props) {
           </button>
           {hasQrCode(place) && (
             <Link
-              href={`/qr/${place.qrCode}`}
+              href={`/qr/${place.id}`}
               className="btn-secondary flex items-center justify-center gap-1 text-xs"
             >
               <QrCode className="h-3.5 w-3.5" /> QR

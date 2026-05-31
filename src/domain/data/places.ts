@@ -516,13 +516,56 @@ function generateAvailability(days: number) {
   return out;
 }
 
+const QR_HISTORY: Record<string, LocalizedString> = {
+  yasawi: L(
+    "1389 жылы Әmir Temir тапсырmasıмен салынған кесене — Тимурид сәулетінің шедеврі. Хожа Ахмет Яссауи XII ғасырда өмір сүрген суfi ақын әрі діни қайраткер. ЮНЕСКО әлемдік мұрасы (2003).",
+    "Мавзолей построен по заказу Тимура в 1389 году — шедевр timuridской архитектуры. Ходжа Ахмет Ясави — поэт и суфий XII века. Объект ЮНЕСКО с 2003 года.",
+    "Commissioned by Timur in 1389, this mausoleum is a masterpiece of Timurid architecture honoring the 12th-century Sufi poet Khoja Ahmed Yasawi. UNESCO World Heritage since 2003."
+  ),
+  otyrar: L(
+    "Отырар — Жібек жолы бойындағы ежелгі қала. XII–XIII ғасырларда сауда мен ғылым орталығы. Моңғол шапқыншылығы кезінде қала қираған.",
+    "Отырар — древний город на Великом шёлковом пути. В XII–XIII вв. центр торговли и науки. Разрушен во время нашествия монголов.",
+    "Otyrar was a major Silk Road city and center of learning in the 12th–13th centuries, destroyed during the Mongol invasion."
+  ),
+  arystan: L(
+    "Арыстан Баб — Хожа Ахмет Яссауидің рухани шәкірті. Кесене XII ғасырда салынған, зияратшылар Түркістанға бармас бұрын осында алады.",
+    "Арыстан Баб — духовный ученик Ходжи Ахмеда Ясави. Мавзолей XII века; паломники посещают его перед поездкой в Туркестан.",
+    "Arystan Bab was a spiritual disciple of Khoja Ahmed Yasawi. The 12th-century mausoleum is visited by pilgrims before Turkestan."
+  ),
+  hazret: L(
+    "2012 жылы ашылған Әзірет Сultan мешіті — Қазақстанның ең үлкен мешіті. Түркістанның заманауи рухани символы.",
+    "Мечеть Әзірет Сultan открыта в 2012 году — крупнейшая в Казахстане. Современный духовный символ Туркестана.",
+    "Opened in 2012, Hazret Sultan Mosque is the largest in Kazakhstan and a modern spiritual landmark of Turkestan."
+  ),
+  museum: L(
+    "Мұражайда кесене тарихы, археологиялық табылғылар және Түркістан мәдениеті көрсетілген.",
+    "Музей представляет историю мавзолея, археологические находки и культуру Туркестана.",
+    "The museum exhibits mausoleum history, archaeological finds, and Turkestan regional culture."
+  ),
+  karavan: L(
+    "Керuen Saray — дүкендер, мейрамханалар және мәдени орталықтан тұратын заманауи туризм кешені.",
+    "Keruen Saray — современный туристический комплекс с магазинами, ресторанами и культурным центром.",
+    "Keruen Saray is a modern tourism complex with shops, restaurants, and a cultural center."
+  ),
+  bazaar: L(
+    "Дәстүрлі базар — ұлттық тағамдар, қолөнер бұйымдары және сувенирлер.",
+    "Традиционный базар — национальная кухня, ремёсла и сувениры.",
+    "Traditional bazaar offering national food, crafts, and souvenirs."
+  ),
+  "nauryz-fest": L(
+    "Наурыз — көктем мерекесі. Түркістанда концерт, этно-фестиваль және ұлттық ойындар өтеді.",
+    "Наурыз — весенний праздник. В Туркестане проходят концерты, этнофестивали и национальные игры.",
+    "Nauryz spring festival with concerts, ethno-festivals, and national games in Turkestan."
+  ),
+};
+
 export const QR_CONTENT: Record<string, QrContent> = Object.fromEntries(
   PLACES.filter((p) => p.qrCode).map((p) => [
     p.id,
     {
       placeId: p.id,
       summary: p.description,
-      history: p.description,
+      history: QR_HISTORY[p.id] ?? p.description,
       gallery: p.images,
       audioGuide: p.audioGuide,
     },

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,15 +9,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useApp } from "@/context/app-context";
-import { QR_OBJECTS, MAP_PINS } from "@/data/tourism";
+import { useTranslation } from "@/hooks/use-translation";
+import { QrPlacesList } from "@/components/qr/qr-places-list";
 
 export function QrFeature() {
-  const { lang, t } = useApp();
-  const [obj, setObj] = useState("yasawi");
-  const pin = MAP_PINS.find((p) => p.id === obj);
-  const meta = QR_OBJECTS.find((q) => q.id === obj);
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://turkestan-travel.kz/site/${obj}`;
+  const { t } = useTranslation();
 
   return (
     <Dialog>
@@ -27,39 +22,14 @@ export function QrFeature() {
           {t("common.open")} →
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[85vh] max-w-lg overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{t("feat.qr.title")}</DialogTitle>
+          <DialogTitle>{t("qr.title")}</DialogTitle>
         </DialogHeader>
-        <div className="flex gap-2">
-          {QR_OBJECTS.map((q) => (
-            <Button
-              key={q.id}
-              size="sm"
-              variant={obj === q.id ? "default" : "ghost"}
-              onClick={() => setObj(q.id)}
-            >
-              {MAP_PINS.find((p) => p.id === q.id)?.name[lang].slice(0, 12)}…
-            </Button>
-          ))}
-        </div>
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
-          <Image src={qrUrl} alt="QR Code" width={180} height={180} className="rounded-xl" unoptimized />
-          <div className="flex-1 text-sm">
-            <h4 className="font-bold">{pin?.name[lang]}</h4>
-            <p className="mt-2 text-navy/60">
-              {lang === "kk" ? "Жұмыс уақыты" : lang === "ru" ? "Часы работы" : "Hours"}: {meta?.hours}
-            </p>
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${pin?.lat},${pin?.lng}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-block text-turquoise hover:underline"
-            >
-              {lang === "kk" ? "Картаға өту" : lang === "ru" ? "На карту" : "Go to map"} →
-            </a>
-          </div>
-        </div>
+        <QrPlacesList compact />
+        <Link href="/qr" className="block text-center text-sm font-semibold text-heritage hover:underline">
+          {t("qr.viewAll")} →
+        </Link>
       </DialogContent>
     </Dialog>
   );

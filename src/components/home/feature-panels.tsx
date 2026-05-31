@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useTranslation } from "@/hooks/use-translation";
 import { BookingPartnersPanel } from "@/components/booking/booking-partners-panel";
 import { AudioComingSoon } from "@/components/audio/audio-coming-soon";
-import { PLACES } from "@/domain/data/places";
 import { LoadingState } from "@/components/shared/loading-state";
+import { QrPlacesList } from "@/components/qr/qr-places-list";
 
 const MapModule = dynamic(
   () => import("@/modules/map").then((m) => m.MapModule),
@@ -33,13 +33,13 @@ export type FeatureId =
   | "help";
 
 export function FeaturePanel({ id }: { id: FeatureId }) {
-  const { t, loc } = useTranslation();
+  const { t } = useTranslation();
 
   if (id === "map") return <MapPanel />;
   if (id === "routes") return <RoutesPanel />;
   if (id === "booking") return <BookingPanel />;
   if (id === "audio") return <AudioPanel />;
-  if (id === "qr") return <QrPanel loc={loc} />;
+  if (id === "qr") return <QrPanel />;
   if (id === "ai") return <AiPanel />;
   if (id === "reviews") return <ReviewsPanel />;
   if (id === "mobile") return <MobilePanel t={t} />;
@@ -84,19 +84,15 @@ function AudioPanel() {
   return <AudioComingSoon compact />;
 }
 
-function QrPanel({ loc }: { loc: (o: { kk: string; ru: string; en: string }) => string }) {
+function QrPanel() {
+  const { t } = useTranslation();
   return (
-    <ul className="space-y-2 text-sm">
-      {PLACES.filter((p) => p.qrCode)
-        .slice(0, 5)
-        .map((p) => (
-          <li key={p.id}>
-            <Link href={`/qr/${p.id}`} className="text-heritage hover:underline">
-              {loc(p.name)} — QR
-            </Link>
-          </li>
-        ))}
-    </ul>
+    <div className="space-y-3">
+      <QrPlacesList compact />
+      <Link href="/qr" className="block text-center text-xs font-semibold text-heritage hover:underline">
+        {t("qr.viewAll")} →
+      </Link>
+    </div>
   );
 }
 
