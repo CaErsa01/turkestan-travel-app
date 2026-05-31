@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect fill="#E8E0D4" width="800" height="500"/>
+  <path fill="#4A8699" opacity="0.3" d="M0 400 L200 300 L400 350 L600 250 L800 320 L800 500 L0 500 Z"/>
+  <text x="400" y="260" text-anchor="middle" fill="#2D3436" font-family="Georgia, serif" font-size="28">Turkistan</text>
+</svg>

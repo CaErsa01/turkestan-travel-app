@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 250 248 245;
+    --foreground: 26 32 44;
+    --heritage: 13 115 119;
+    --gold: 198 156 85;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply overflow-x-hidden bg-[#FAF8F5] text-[#1A202C] antialiased;
+  }
+}
+
+@layer components {
+  .glass-nav {
+    @apply border-b border-white/20 bg-white/80 shadow-[0_4px_30px_rgba(0,0,0,0.06)] backdrop-blur-xl;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(
+      105deg,
+      rgba(15, 23, 42, 0.88) 0%,
+      rgba(15, 23, 42, 0.55) 45%,
+      rgba(13, 115, 119, 0.35) 100%
+    );
+  }
+
+  .feature-card {
+    @apply relative overflow-hidden rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition duration-300;
+  }
+
+  .feature-card:hover {
+    @apply shadow-[0_20px_50px_rgba(0,0,0,0.18)] -translate-y-0.5;
+  }
+
+  .feature-card-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(15, 23, 42, 0.92) 0%,
+      rgba(15, 23, 42, 0.45) 50%,
+      rgba(15, 23, 42, 0.15) 100%
+    );
+  }
+
+  .nav-pill {
+    @apply rounded-full px-4 py-2 text-sm font-medium transition;
+  }
+
+  .nav-pill-active {
+    @apply bg-[#0D7377] text-white shadow-md;
+  }
+
+  .nav-pill-idle {
+    @apply text-[#1A202C]/70 hover:bg-[#0D7377]/10 hover:text-[#0D7377];
+  }
+
+  .search-bar {
+    @apply flex items-center gap-3 rounded-full bg-white px-2 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.15)] ring-1 ring-black/5;
+  }
+
+  .stat-pill {
+    @apply rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md;
+  }
+
+  .destination-card {
+    @apply relative min-w-[200px] overflow-hidden rounded-2xl shadow-lg transition hover:scale-[1.02];
+  }
+
+  .panel-light {
+    @apply rounded-xl border border-charcoal/10 bg-white shadow-card;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-heritage px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-heritage-dark;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-charcoal/15 bg-white px-5 py-2.5 text-sm font-semibold text-charcoal transition hover:border-heritage hover:text-heritage;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
